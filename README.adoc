@@ -1,0 +1,39 @@
+= KT-29699
+
+== To Build
+
+`gradle --no-build-cache --no-daemon clean build`
+
+== Details
+
+To reproduce the bug, in your **$HOME/.gradle/gradle.properties**, enable this:
+
+----
+#
+# Global Stuff
+#
+org.gradle.daemon=true
+org.gradle.console=verbose
+org.gradle.parallel=true
+org.gradle.caching=true
+org.gradle.priority=low
+kotlin.incremental=true
+kotlin.parallel.tasks.in.project=true
+----
+
+To allow the compilation to succeed, comment out the
+**kotlin.parallel.tasks.in.project** line, i.e.,
+
+----
+#
+# Global Stuff
+#
+org.gradle.daemon=true
+org.gradle.console=verbose
+org.gradle.parallel=true
+org.gradle.caching=true
+org.gradle.priority=low
+kotlin.incremental=true
+#kotlin.parallel.tasks.in.project=true
+----
+
